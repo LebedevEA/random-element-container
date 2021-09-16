@@ -23,7 +23,7 @@ public:
         }
     }
 
-    bool erase(const T &value) {
+    bool erase(const T& value) {
         auto value_pos = element_to_index_.find(value);
         if (value_pos == element_to_index_.end()) return false;
 
@@ -38,12 +38,7 @@ public:
         return true;
     }
 
-    [[nodiscard]] T &get_random_element() {
-        std::size_t random_index = rnd_() % elements_.size();
-        return elements_[random_index];
-    }
-
-    [[nodiscard]] const T &get_random_element() const {
+    [[nodiscard]] T get_random_element() const {
         std::size_t random_index = rnd_() % elements_.size();
         return elements_[random_index];
     }
