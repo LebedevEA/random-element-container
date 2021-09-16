@@ -5,10 +5,12 @@
 namespace rnd_cnt::impl::is_hashable_impl {
 
 template<class, class T, class Hash>
-struct is_hashable_impl : std::false_type {};
+struct is_hashable_impl : std::false_type {
+};
 
 template<class T, class Hash>
-struct is_hashable_impl<std::void_t<decltype(Hash()(std::declval<T>()))>, T, Hash> : std::true_type {};
+struct is_hashable_impl<std::void_t<decltype(Hash()(std::declval<T>()))>, T, Hash> : std::true_type {
+};
 
 } // namespace rnd_cnt::impl::is_hashable_impl
 

@@ -11,10 +11,12 @@ class random_container;
 
 template<class T, class Hash, class Eq>
 class random_container<T, Hash, Eq, typename std::enable_if<impl::is_hashable<T, Hash>::value>::type>
-        : public impl::hashing_impl<T, Hash, Eq> {};
+        : public impl::hashing_impl<T, Hash, Eq> {
+};
 
 template<class T, class Hash, class Eq>
 class random_container<T, Hash, Eq, typename std::enable_if<!impl::is_hashable<T, Hash>::value>::type>
-        : public impl::non_hashing_impl<T, Eq> {};
+        : public impl::non_hashing_impl<T, Eq> {
+};
 
 } // namespace rnd_cnt

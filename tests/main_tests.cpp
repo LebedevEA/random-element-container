@@ -23,9 +23,9 @@ TEST_CASE("simple w/ hashable") {
 
 TEST_CASE("simple w/ not hashable") {
     random_container<not_hashable> container;
-    container.add({1 });
-    container.add({2 });
-    container.add({3 });
+    container.add({1});
+    container.add({2});
+    container.add({3});
     test_gives_only(container, vec_of<not_hashable>(1, 2, 3));
 }
 
@@ -74,17 +74,17 @@ TEST_CASE("basic compile") {
 TEST_CASE("not default constructable compile w/o hash") {
     REQUIRE(!std::is_default_constructible_v<not_default_constructable>);
     random_container<not_default_constructable> container;
-    container.add({ "str" });
+    container.add({"str"});
     auto nodiscard_value = container.get_random_element();
-    container.erase({ "str" });
+    container.erase({"str"});
 }
 
 TEST_CASE("not default constructable compile w/ hash") {
     REQUIRE(!std::is_default_constructible_v<not_default_constructable>);
     random_container<not_default_constructable, std::hash<std::string>> container;
-    container.add({ "str" });
+    container.add({"str"});
     auto nodiscard_value = container.get_random_element();
-    container.erase({ "str" });
+    container.erase({"str"});
 }
 
 TEST_CASE("works in const") {
