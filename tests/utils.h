@@ -118,8 +118,6 @@ struct not_default_constructable {
     not_default_constructable(std::string s)
             : s(std::move(s)) {}
 
-    std::string s;
-
     bool operator==(const not_default_constructable& other) const noexcept {
         return this->s == other.s;
     }
@@ -127,11 +125,30 @@ struct not_default_constructable {
     operator std::string() const {
         return s;
     }
+
+    std::string s;
 };
 
 template<class RC>
 void get_random_element_as_const(const RC& container, int expected) {
     CHECK(expected == container.get_random_element());
 }
+
+struct not_copy_assignable {
+    not_copy_assignable(std::string s)
+            : s(std::move(s)) {}
+
+    bool operator==(const not_copy_assignable& other) const noexcept {
+        return this->s == other.s;
+    }
+
+    not_copy_assignable& operator=(const not_copy_assignable&) = delete;
+
+    operator std::string() const {
+        return s;
+    }
+
+    std::string s;
+};
 
 } // namespace compilation

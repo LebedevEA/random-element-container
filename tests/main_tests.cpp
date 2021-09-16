@@ -47,11 +47,11 @@ TEST_CASE("many add/remove w/ int") {
     test_case_many_add_remove<int>();
 }
 
-TEST_CASE("many add/remove w/ int") {
+TEST_CASE("many add/remove w/ hashable") {
     test_case_many_add_remove<std_hashable>();
 }
 
-TEST_CASE("many add/remove w/ int") {
+TEST_CASE("many add/remove w/ not hashable") {
     test_case_many_add_remove<not_hashable, not_hashable_hash>();
 }
 
@@ -71,7 +71,7 @@ TEST_CASE("basic compile") {
     container_not_hashable.erase(1);
 }
 
-TEST_CASE("not default constructable compile w/o hash") {
+TEST_CASE("not default constructable compiles w/o hash") {
     REQUIRE(!std::is_default_constructible_v<not_default_constructable>);
     random_container<not_default_constructable> container;
     container.add({"str"});
@@ -79,7 +79,7 @@ TEST_CASE("not default constructable compile w/o hash") {
     container.erase({"str"});
 }
 
-TEST_CASE("not default constructable compile w/ hash") {
+TEST_CASE("not default constructable compiles w/ hash") {
     REQUIRE(!std::is_default_constructible_v<not_default_constructable>);
     random_container<not_default_constructable, std::hash<std::string>> container;
     container.add({"str"});
@@ -95,6 +95,22 @@ TEST_CASE("works in const") {
     random_container<int, void> not_hashable;
     not_hashable.add(2);
     get_random_element_as_const(not_hashable, 2);
+}
+
+TEST_CASE("not copy assignable compiles w/ hash") {
+    REQUIRE(!std::is_copy_assignable_v<not_copy_assignable>);
+    random_container<not_default_constructable, std::hash<std::string>> container;
+    container.add({"str"});
+    auto nodiscard_value = container.get_random_element();
+    container.erase({"str"});
+}
+
+TEST_CASE("not copy assignable compiles w/o hash") {
+    REQUIRE(!std::is_copy_assignable_v<not_copy_assignable>);
+    random_container<not_default_constructable> container;
+    container.add({"str"});
+    auto nodiscard_value = container.get_random_element();
+    container.erase({"str"});
 }
 
 } // namespace compilation
