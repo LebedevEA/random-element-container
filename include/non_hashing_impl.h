@@ -24,7 +24,7 @@ public:
         return true;
     }
 
-    [[nodiscard]] T get_random_element() const {
+    [[nodiscard]] const T& get_random_element() const {
         if (elements_.empty()) throw std::out_of_range("no elements in container");
         std::size_t random_index = rnd_() % elements_.size();
         return elements_[random_index];
