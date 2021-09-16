@@ -114,13 +114,13 @@ struct hash<correctness::std_hashable> {
 
 namespace compilation {
 
-struct not_default_constructible {
-    not_default_constructible(std::string s)
+struct not_default_constructable {
+    not_default_constructable(std::string s)
             : s(std::move(s)) {}
 
     std::string s;
 
-    bool operator==(const not_default_constructible& other) const noexcept {
+    bool operator==(const not_default_constructable& other) const noexcept {
         return this->s == other.s;
     }
 

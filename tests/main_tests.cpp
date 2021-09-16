@@ -71,17 +71,17 @@ TEST_CASE("basic compile") {
     container_not_hashable.erase(1);
 }
 
-TEST_CASE("not default constructible compile w/o hash") {
-    REQUIRE(!std::is_default_constructible_v<not_default_constructible>);
-    random_container<not_default_constructible> container;
+TEST_CASE("not default constructable compile w/o hash") {
+    REQUIRE(!std::is_default_constructible_v<not_default_constructable>);
+    random_container<not_default_constructable> container;
     container.add({ "str" });
     auto nodiscard_value = container.get_random_element();
     container.erase({ "str" });
 }
 
-TEST_CASE("not default constructible compile w/ hash") {
-    REQUIRE(!std::is_default_constructible_v<not_default_constructible>);
-    random_container<not_default_constructible, std::hash<std::string>> container;
+TEST_CASE("not default constructable compile w/ hash") {
+    REQUIRE(!std::is_default_constructible_v<not_default_constructable>);
+    random_container<not_default_constructable, std::hash<std::string>> container;
     container.add({ "str" });
     auto nodiscard_value = container.get_random_element();
     container.erase({ "str" });
